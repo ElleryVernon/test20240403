@@ -1,14 +1,11 @@
 import Anthropic from "@anthropic-ai/sdk";
 
-const anthropic = new Anthropic({
-	apiKey: "my_api_key", // defaults to process.env["ANTHROPIC_API_KEY"]
-});
-
 import { User } from "@prisma/client";
+import { ANTHROPIC_API_KEY } from "../../config/env";
 
 async function questionAndAnswer(question: string, user: User): Promise<String> {
 	const anthropic = new Anthropic({
-		apiKey: process.env.ANTHROPIC_API_KEY,
+		apiKey: ANTHROPIC_API_KEY,
 	});
 
 	const msg = await anthropic.messages.create({
