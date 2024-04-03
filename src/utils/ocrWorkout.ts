@@ -4,13 +4,14 @@ import FormData from "form-data";
 import { createId } from "@paralleldrive/cuid2";
 import { downloadImageAsBuffer } from "./networkUtils";
 import Anthropic from "@anthropic-ai/sdk";
+import { ANTHROPIC_API_KEY } from "../../config/env";
 
 const API_URL =
 	"https://maz81ke37z.apigw.ntruss.com/custom/v1/18444/3183dd1086134e67836b4e06b0f6b2cc60289b7128ea6c4d1d0b2dedca17a492/general";
 const SECRET_KEY = "U2VQbG90VmJJTkJVZm1DbFFNclJ3d1ZmWWJuR0VpT2c=";
 
 const anthropic = new Anthropic({
-	apiKey: process.env.ANTHROPIC_API_KEY!,
+	apiKey: ANTHROPIC_API_KEY,
 });
 
 interface OCRMessage {
