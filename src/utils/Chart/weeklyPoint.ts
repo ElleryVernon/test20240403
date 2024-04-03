@@ -1,4 +1,4 @@
-import { createCanvas, Image } from "canvas";
+import { createCanvas, Image, registerFont } from "canvas";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { UserData } from "../dataUtils";
 import {
@@ -13,6 +13,8 @@ import {
 	Tooltip,
 } from "chart.js";
 import { roundToDecimal } from "../mathUtils";
+
+registerFont("./src/fonts/NanumGothic.ttf", { family: "NanumGothic" });
 
 Chart.register(
 	BarController,

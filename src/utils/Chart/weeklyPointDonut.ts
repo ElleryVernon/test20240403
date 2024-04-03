@@ -2,6 +2,7 @@ import {
 	Image,
 	CanvasRenderingContext2D as NodeCanvasRenderingContext2D,
 	createCanvas,
+	registerFont,
 } from "canvas";
 import {
 	ArcElement,
@@ -15,6 +16,7 @@ import {
 } from "chart.js";
 import { roundToDecimal } from "../mathUtils";
 import { CARDIO_WORKOUTS } from "../../../config/constants";
+registerFont("./src/fonts/NanumGothic.ttf", { family: "NanumGothic" });
 
 interface DoughnutLabelOptions {
 	displayLabels: boolean;

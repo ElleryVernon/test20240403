@@ -1,5 +1,6 @@
-import { createCanvas } from "canvas";
+import { createCanvas, registerFont } from "canvas";
 import { Chart, ChartConfiguration, registerables } from "chart.js";
+registerFont("./src/fonts/NanumGothic.ttf", { family: "NanumGothic" });
 
 Chart.register(...registerables);
 

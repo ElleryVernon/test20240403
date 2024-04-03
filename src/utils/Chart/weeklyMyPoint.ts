@@ -1,5 +1,5 @@
 // weeklyPoint.ts
-import { createCanvas } from "canvas";
+import { createCanvas, registerFont } from "canvas";
 import {
 	BarController,
 	BarElement,
@@ -12,6 +12,8 @@ import {
 	Tooltip,
 } from "chart.js";
 import { DailyWorkoutData, getWeeklyWorkoutData } from "../dataUtils";
+
+registerFont("./src/fonts/NanumGothic.ttf", { family: "NanumGothic" });
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
