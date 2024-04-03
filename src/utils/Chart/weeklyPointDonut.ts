@@ -120,7 +120,7 @@ function getDonutChartOptions(
 				yCoor + 24
 			);
 			ctx.font = "semibold 40px sans-serif";
-			ctx.fillText(`근력운동 ${options.intervalWorkoutCount}회`, xCoor, yCoor + 100);
+			ctx.fillText(`근력운동 ${options.intervalWorkoutCount}회`, xCoor, yCoor + 144);
 
 			ctx.restore();
 		},
