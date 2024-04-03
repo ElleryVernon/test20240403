@@ -1,13 +1,7 @@
-import dayjs from "dayjs";
 import { INTENSITY_ZONE } from "../../config/constants";
 import { prisma } from "../db";
 import { getStartAndEndOfWeek } from "./dateUtils";
 import { calculateMean, calculateStandardDeviation } from "./mathUtils";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
-
-dayjs.extend(timezone);
-dayjs.extend(utc);
 
 export interface UserData {
 	name: string;
@@ -22,7 +16,7 @@ export interface DailyWorkoutData {
 		point: number;
 		intensityZone: number;
 	}[];
-	hasIntervalWorkout: boolean; // 추가
+	hasIntervalWorkout: boolean;
 }
 
 type IntensityZone = {
@@ -176,19 +170,19 @@ export async function calculateWeeklyLoadsForUser(discordId: string) {
 	}
 
 	const latestYear = userWithYear.year[0].year;
-	const startDate = dayjs(new Date(latestYear.startDate!));
-	const currentDate = dayjs();
+	const startDate = new Date(latestYear.startDate!);
+	const currentDate = new Date();
 
-	const weekDiff = currentDate.diff(startDate, "week");
+	const weekDiff = Math.floor(
+		(currentDate.getTime() - startDate.getTime()) / (7 * 24 * 60 * 60 * 1000)
+	);
 
 	const weeks = Array.from({ length: weekDiff + 1 }, (_, i) => {
-		const startOfWeek = startDate.add(i * 7, "day").toDate();
-		const endOfWeek = startDate
-			.add(i * 7 + 6, "day")
-			.set("hour", 23)
-			.set("minute", 59)
-			.set("second", 59)
-			.toDate();
+		const startOfWeek = new Date(startDate);
+		startOfWeek.setDate(startOfWeek.getDate() + i * 7);
+		const endOfWeek = new Date(startOfWeek);
+		endOfWeek.setDate(endOfWeek.getDate() + 6);
+		endOfWeek.setHours(23, 59, 59, 999);
 
 		return { startOfWeek, endOfWeek };
 	});
@@ -211,7 +205,7 @@ export async function calculateWeeklyLoadsForUser(discordId: string) {
 		const dailyLoads = Array(7).fill(0);
 
 		weeklyWorkouts.forEach((workout) => {
-			const dayIndex = dayjs(workout.createdAt).day();
+			const dayIndex = new Date(workout.createdAt).getUTCDay();
 			dailyLoads[dayIndex] = (dailyLoads[dayIndex] || 0) + workout.dailyLoad;
 		});
 
@@ -273,7 +267,9 @@ export async function getWeeklyWorkoutData(discordId: string): Promise<DailyWork
 		}));
 
 	workouts.forEach((workout) => {
-		const createdAtKST = new Date(workout.createdAt.toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
+		const createdAtKST = new Date(
+			workout.createdAt.toLocaleString("en-US", { timeZone: "Asia/Seoul" })
+		);
 		const dayIndex = createdAtKST.getUTCDay();
 		if (workout.category === "CARDIO") {
 			dailyWorkoutData[dayIndex].workouts.push({
