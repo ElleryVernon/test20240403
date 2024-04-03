@@ -14,6 +14,12 @@ import {
 import { DailyWorkoutData, getWeeklyWorkoutData } from "../dataUtils";
 
 registerFont("./src/fonts/NanumGothic.ttf", { family: "NanumGothic" });
+registerFont("./src/fonts/NanumGothicBold.ttf", { family: "NanumGothic", weight: "bold" });
+registerFont("./src/fonts/NanumGothicExtraBold.ttf", {
+	family: "NanumGothic",
+	weight: "extrabold",
+});
+registerFont("./src/fonts/NanumGothicLight.ttf", { family: "NanumGothic", weight: "light" });
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
