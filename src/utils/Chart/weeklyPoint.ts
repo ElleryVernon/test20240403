@@ -73,7 +73,7 @@ function createChartConfiguration(
 			layout: {
 				padding: {
 					top: 24,
-					right: 20,
+					right: 112,
 					bottom: 32,
 					left: 20,
 				},
