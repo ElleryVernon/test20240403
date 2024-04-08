@@ -1,5 +1,6 @@
 export const CARDIO_WORKOUTS = {
 	WALKING: "걷기",
+	BASKETBALL: "농구",
 	HIIT: "HIIT",
 	RUNNING: "달리기",
 	CLIMBING: "등산",
