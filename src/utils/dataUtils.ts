@@ -258,6 +258,8 @@ export async function getWeeklyWorkoutData(discordId: string): Promise<DailyWork
 		},
 	});
 
+	console.log(workouts);
+
 	const dailyWorkoutData: DailyWorkoutData[] = Array(7)
 		.fill(null)
 		.map((_, index) => ({
@@ -270,7 +272,7 @@ export async function getWeeklyWorkoutData(discordId: string): Promise<DailyWork
 		const createdAtKST = new Date(
 			workout.createdAt.toLocaleString("en-US", { timeZone: "Asia/Seoul" })
 		);
-		const dayIndex = createdAtKST.getUTCDay();
+		const dayIndex = createdAtKST.getDay();
 		if (workout.category === "CARDIO") {
 			dailyWorkoutData[dayIndex].workouts.push({
 				workoutName: workout.workoutName!,

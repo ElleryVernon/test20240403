@@ -121,7 +121,7 @@ function createChartConfiguration(
 							)?.hasIntervalWorkout;
 							const day = ["월", "화", "수", "목", "금", "토", "일"][value as number];
 							if (hasIntervalWorkout) {
-								return `● ${day}`; // 인터벌 운동 기록이 있는 요일은 큰 점(●) 표시
+								return `● ${day}`;
 							}
 							return day;
 						},
